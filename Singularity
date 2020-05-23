@@ -4,6 +4,9 @@ From: archlinux
 %runscript
     echo "scgenome"
 
+%environment
+    export PATH=/opt/miniconda3/bin:$PATH
+
 %post
     echo "scgenome"
 
@@ -16,22 +19,25 @@ From: archlinux
     echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 
     # set the package mirror server
-    echo 'Server = https://mirrors.kernel.org/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+    echo 'Server = https://mirrors.kernel.org/archlinux/$repo/os/$arch' > \
+        /etc/pacman.d/mirrorlist
     # add fail-over servers
-    echo 'Server = https://archlinux.honkgong.info/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
+    echo 'Server = https://archlinux.honkgong.info/$repo/os/$arch' >> \
+        /etc/pacman.d/mirrorlist
 
     # install arch packages
     pacman -Syu --noconfirm wget
     pacman -Syu --noconfirm unzip
-    #pacman -Syu --noconfirm git
     pacman -Syu --noconfirm --needed base-devel
-    pacman -Syu --noconfirm openblas
-    pacman -Syu --noconfirm lapack
-    pacman -Syu --noconfirm gcc-fortran
-    pacman -Syu --noconfirm python python-pip
+    pacman -Syu --noconfirm git
+
+    # install miniconda
+    wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh
+    bash Miniconda3-py37_4.8.2-Linux-x86_64.sh -bfp /opt/miniconda3
+    rm -f Miniconda3-py37_4.8.2-Linux-x86_64.sh
+    export PATH=/opt/miniconda3/bin:$PATH
 
     # install scgenome and dependencies
-    #git clone git@github.com:shahcompbio/scgenome.git
     wget https://codeload.github.com/shahcompbio/scgenome/zip/master -O scgenome.zip
     unzip scgenome.zip
     cd scgenome-master
