@@ -30,7 +30,7 @@ From: archlinux
     pacman -Syu --noconfirm unzip
     pacman -Syu --noconfirm --needed base-devel
     pacman -Syu --noconfirm git
-    pacman -Syu --noconfirm xorg-server
+    pacman -Syu --noconfirm xorg-server-xvfb
 
     # install miniconda
     wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh
