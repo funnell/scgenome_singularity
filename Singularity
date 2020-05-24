@@ -3,9 +3,11 @@ From: archlinux
 
 %runscript
     echo "scgenome"
+    Xvfb :1 -screen 0 1024x768x16 &> xvfb.log &
 
 %environment
     export PATH=/opt/miniconda3/bin:$PATH
+    export DISPLAY=:1.0
 
 %post
     echo "scgenome"
