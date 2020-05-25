@@ -3,11 +3,9 @@ From: archlinux
 
 %runscript
     echo "scgenome"
-    Xvfb :1 -screen 0 1024x768x16 &> xvfb.log &
 
 %environment
     export PATH=/opt/miniconda3/bin:$PATH
-    export DISPLAY=:1.0
 
 %post
     echo "scgenome"
@@ -32,7 +30,6 @@ From: archlinux
     pacman -Syu --noconfirm unzip
     pacman -Syu --noconfirm --needed base-devel
     pacman -Syu --noconfirm git
-    pacman -Syu --noconfirm xorg-server-xvfb
 
     # install miniconda
     wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh
@@ -46,6 +43,7 @@ From: archlinux
     cd scgenome-master
     pip install numpy cython
     pip install -r requirements.txt
+    pip install numpy cython umap --upgrade
     python setup.py install
 
     # Remove the packages downloaded to Pacman cache dir.
