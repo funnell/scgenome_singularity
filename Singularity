@@ -43,7 +43,7 @@ From: archlinux
     cd scgenome-master
     pip install numpy cython
     pip install -r requirements.txt
-    pip install numpy cython umap --upgrade
+    pip install numpy cython umap matplotlib --upgrade
     python setup.py install
 
     # Remove the packages downloaded to Pacman cache dir.
